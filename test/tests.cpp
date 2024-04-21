@@ -1,7 +1,7 @@
 // Copyright 2024 Alexander Sidelnikov
 
-#include "textgen.h"
 #include <gtest/gtest.h>
+#include "textgen.h"
 
 TEST(textgen, prefix_with_specified_number_of_words) {
     int prefix_size = 2;
