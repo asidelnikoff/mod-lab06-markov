@@ -1,6 +1,5 @@
 // Copyright 2024 Alexander Sidelnikov
 
-#include <sstream>
 #include "textgen.h"
 #include <gtest/gtest.h>
 
