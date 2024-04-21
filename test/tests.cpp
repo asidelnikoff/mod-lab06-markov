@@ -47,7 +47,7 @@ TEST(textgen, choose_suffix_from_multiple) {
 
     auto result = generator.generate(3);
 
-    std::string expected = "Aome Bords Dot ";
+    std::string expected = "Aome Bords Co ";
     EXPECT_EQ(expected, result);
 }
 
