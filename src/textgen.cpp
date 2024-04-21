@@ -41,8 +41,8 @@ std::string TextGenerator::generate(int text_length) {
     auto begin = statetab_copy.begin();
 
     auto prefix = begin->first;
-    for (auto prefix_it = prefix.begin(); 
-        prefix_it != prefix.end(); 
+    for (auto prefix_it = prefix.begin();
+        prefix_it != prefix.end();
         prefix_it++) {
         result += *prefix_it + " ";
     }
