@@ -11,13 +11,13 @@ TextGenerator::TextGenerator(int prefix_size, unsigned int random_seed) {
 void TextGenerator::create_suffix_map(std::istream &input) {
     std::string word;
     prefix prefix;
-    
-    while(input >> word) {
-        if(prefix.size() == prefix_size) {
+
+    while (input >> word) {
+        if (prefix.size() == prefix_size) {
             statetab[prefix].push_back(word);
             prefix.pop_front();
         }
-        
+
         prefix.push_back(word);
     }
 }
@@ -31,7 +31,7 @@ std::map<prefix, std::vector<std::string>> TextGenerator::get_suffix_map() {
 }
 
 std::string TextGenerator::generate(int text_length) {
-    if(text_length <= 0) {
+    if (text_length <= 0) {
         return "";
     }
     std::string result = "";
@@ -40,22 +40,23 @@ std::string TextGenerator::generate(int text_length) {
     auto begin = statetab_copy.begin();
 
     auto prefix = begin->first;
-    for(auto prefix_it = prefix.begin(); prefix_it != prefix.end(); prefix_it++) {
+    for (auto prefix_it = prefix.begin(); prefix_it != prefix.end(); prefix_it++) {
         result += *prefix_it + " ";
     }
 
-    for(int i = prefix_size; i < text_length; i++) {
-        if(statetab_copy[prefix].empty()) {
+    for (int i = prefix_size; i < text_length; i++) {
+        if (statetab_copy[prefix].empty()) {
             break;
         }
         
-        int random_suffix_index = /*rand_r(&random_seed)*/ rand() % statetab_copy[prefix].size();
+        int random_suffix_index = rand_r(&random_seed) % statetab_copy[prefix].size();
         std::string word = statetab_copy[prefix][random_suffix_index];
-        
+
         result += word + " ";
-        
-        statetab_copy[prefix].erase(statetab_copy[prefix].begin() + random_suffix_index);
-        
+
+        auto to_delete = statetab_copy[prefix].begin() + random_suffix_index;
+        statetab_copy[prefix].erase(to_delete);
+
         prefix.pop_front();
         prefix.push_back(word);
     }

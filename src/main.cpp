@@ -1,14 +1,14 @@
 // Copyright 2024 Alexander Sidelnikov
 
-#include "textgen.h"
 #include <fstream>
 #include <sstream>
 
+#include "textgen.h"
+
 int main() {
-    
     const int NPREF = 2;
     const int MAXGEN = 1000;
-    
+
     TextGenerator generator(NPREF);
 
     std::ifstream file("train.txt");
@@ -17,7 +17,7 @@ int main() {
     auto map = generator.get_suffix_map();
 
     std::string result = generator.generate(MAXGEN);
-    
+
     std::ofstream out("generated.txt");
     out << result << std::endl;
 }
