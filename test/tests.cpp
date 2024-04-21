@@ -16,7 +16,7 @@ TEST(textgen, prefix_with_specified_number_of_words) {
     }
 }
 
-TEST(textgen, create_prefix-suffix_map) {
+TEST(textgen, create_prefixsuffix_map) {
     int prefix_size = 2;
     TextGenerator generator(prefix_size);
     std::istringstream input("some words go here");
@@ -62,7 +62,7 @@ TEST(textgen, generate_text_with_given_table) {
     };
     generator.create_suffix_map(map);
 
-    generator.generate(4);
+    auto result = generator.generate(4);
 
     std::string expected = "Some words less likely ";
     EXPECT_EQ(expected, result);
