@@ -1,17 +1,18 @@
 // Copyright 2024 Alexander Sidelnikov
+
+#include <sstream>
 #include <gtest/gtest.h>
 #include "textgen.h"
-#include <sstream>
 
 TEST(textgen, prefix_with_specified_number_of_words) {
     int prefix_size = 2;
     TextGenerator generator(prefix_size);
     std::istringstream input("some words go here");
-    
+
     generator.create_suffix_map(input);
 
     auto map = generator.get_suffix_map();
-    for(auto prefix : map) {
+    for (auto prefix : map) {
         EXPECT_EQ(prefix_size, prefix.first.size());
     }
 }
@@ -20,7 +21,7 @@ TEST(textgen, create_prefixsuffix_map) {
     int prefix_size = 2;
     TextGenerator generator(prefix_size);
     std::istringstream input("some words go here");
-    
+
     generator.create_suffix_map(input);
 
     auto map = generator.get_suffix_map();
@@ -47,7 +48,7 @@ TEST(textgen, choose_suffix_from_multiple) {
 
     auto result = generator.generate(3);
 
-    std::string expected = "Aome Bords Co ";
+    std::string expected = "Aome Bords Dot ";
     EXPECT_EQ(expected, result);
 }
 

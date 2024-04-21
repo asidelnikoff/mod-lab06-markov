@@ -22,7 +22,8 @@ void TextGenerator::create_suffix_map(std::istream &input) {
     }
 }
 
-void TextGenerator::create_suffix_map(std::map<prefix, std::vector<std::string>> map) {
+void TextGenerator::create_suffix_map(
+    std::map<prefix, std::vector<std::string>> map) {
     statetab = map;
 }
 
@@ -40,7 +41,9 @@ std::string TextGenerator::generate(int text_length) {
     auto begin = statetab_copy.begin();
 
     auto prefix = begin->first;
-    for (auto prefix_it = prefix.begin(); prefix_it != prefix.end(); prefix_it++) {
+    for (auto prefix_it = prefix.begin(); 
+        prefix_it != prefix.end(); 
+        prefix_it++) {
         result += *prefix_it + " ";
     }
 
@@ -48,13 +51,13 @@ std::string TextGenerator::generate(int text_length) {
         if (statetab_copy[prefix].empty()) {
             break;
         }
-        
-        int random_suffix_index = rand_r(&random_seed) % statetab_copy[prefix].size();
-        std::string word = statetab_copy[prefix][random_suffix_index];
+
+        int suffix_index = rand_r(&random_seed) % statetab_copy[prefix].size();
+        std::string word = statetab_copy[prefix][suffix_index];
 
         result += word + " ";
 
-        auto to_delete = statetab_copy[prefix].begin() + random_suffix_index;
+        auto to_delete = statetab_copy[prefix].begin() + suffix_index;
         statetab_copy[prefix].erase(to_delete);
 
         prefix.pop_front();
